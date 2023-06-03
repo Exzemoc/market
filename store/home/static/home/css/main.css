@@ -1,0 +1,55 @@
+/* Стили для шапки */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Стили для навигации */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+nav ul li a:hover {
+    background-color: #ccc;
+}
+
+/* Стили для основного содержимого */
+main {
+    padding: 20px;
+}
+
+/* Стили для подвала */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Стили для ссылок */
+a {
+    color: #333;
+}
+
+a:hover {
+    text-decoration: underline;
+}
