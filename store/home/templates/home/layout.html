@@ -16,9 +16,12 @@
             <li><a href="/">Главная</a></li>
             <li><a href="/products/">Товары</a></li>
             <li><a href="/about/">О нас</a></li>
-            <li><a href="/about/">Регистрация</a></li>
-            <li><a href="/about/">Войти</a></li>
-            <li><a href="/about/">Выйти</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Выход</a></li>
+            {% else %}
+           <li><a href="{% url 'register'%}">Регистрация</a></li>
+           <li><a href="{% url 'login'%}">Войти</a></li>
+        {% endif %}
     </nav>
 
     <main>
