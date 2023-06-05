@@ -6,6 +6,13 @@
         <h1>{{ product.name }}</h1>
         <p>Цена: {{ product.price }}</p>
         <p>Описание: {{ product.description }}</p>
-
+    </div>
+    <div>
+        <form id="form_buying_product" class="form-inline">
+            <input type="number" class="form-control">
+        </form>
+        <button type="submit" class="btn btn-succes btb-buy">
+            Купить
+        </button>
     </div>
 {% endblock %}
