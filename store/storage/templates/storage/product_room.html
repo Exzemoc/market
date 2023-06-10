@@ -1,17 +1,43 @@
-{% extends  'home/layout.html' %}
-{% block title %} {{title}} {% endblock %}
+{% extends 'home/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
 
 {% block content %}
     <div class="features">
         <h1>{{ product.name }}</h1>
         <p>Цена: {{ product.price }}</p>
         <p>Описание: {{ product.description }}</p>
+        {% if average_rating %}
+        <p>Средний рейтинг: {{ average_rating|floatformat:1 }}</p>
+        {% endif %}
     </div>
+
+    {% if user.is_authenticated %}
+        {% if not already_rated %}
+            <form method="POST" action="{% url 'rate_product' pk=product.id %}">
+                {% csrf_token %}
+                <label for="rating">Оценка:</label>
+                <select name="rating" id="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button type="submit">Оценить</button>
+            </form>
+        {% else %}
+            <p>Вы уже оценили этот товар.</p>
+        {% endif %}
+    {% else %}
+        <p>Чтобы оценить этот товар, пожалуйста, <a href="{% url 'login' %}">войдите</a>.</p>
+    {% endif %}
+
     <div>
         <form id="form_buying_product" class="form-inline">
             <input type="number" class="form-control">
         </form>
-        <button type="submit" class="btn btn-succes btb-buy">
+        <button type="submit" class="btn btn-success btb-buy">
             Купить
         </button>
     </div>

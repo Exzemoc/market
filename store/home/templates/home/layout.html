@@ -8,14 +8,13 @@
 </head>
 <body>
     <header>
-        <h1>Онлайн барахолка</h1>
+        <h1>Онлайн магазин книг</h1>
     </header>
 
     <nav>
         <ul>
             <li><a href="/">Главная</a></li>
             <li><a href="/products/">Товары</a></li>
-            <li><a href="/about/">О нас</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Выход</a></li>
             {% else %}

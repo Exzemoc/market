@@ -4,7 +4,15 @@
 {% block content %}
     <div class="features">
         <h1>{{title}}</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus assumenda, delectus, deserunt, dolorum enim eum ex impedit libero magnam nisi officia omnis perferendis quisquam repellendus unde veritatis voluptate! Cum, maxime?</p>
-        <button class="btn btn-warning">Кнопка</button>
+        {% for product in latest_products %}
+        <div class="product">
+            <h3>{{ product.name }}</h3>
+            <p>Цена: {{ product.price }}</p>
+            <p>Тип: {{ product.tip }}</p>
+            <p>Описание: {{ product.description }}</p>
+            <img src="{{ product.productimage_set.first.image.url }}" alt="Фото товара">
+            <a href="{% url 'product_room' product.id %}" class="btn btn-warning">Подробнее<a/>
+        </div>
+        {% endfor %}
     </div>
 {% endblock %}

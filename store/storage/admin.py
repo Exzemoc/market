@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Product, ProductImage
+from .models import Rating
 
 
 class ProductImageInline(admin.TabularInline):
@@ -25,3 +26,5 @@ class ProductImageAdmin (admin.ModelAdmin):
 
 admin.site.register(ProductImage, ProductImageAdmin)
 
+
+admin.site.register(Rating)
