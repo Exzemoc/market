@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg
+from orders.models import Cart
 
 class Product(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True, default=None)
@@ -10,11 +11,11 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='products', null=True, blank=True)
     def average_rating(self):
         return self.rating_set.aggregate(Avg('rating'))['rating__avg']
 
-    def __STR__(self):
+    def __str__(self):
         return "%s, %s" % (self.price, self.name)
 
     class Meta:

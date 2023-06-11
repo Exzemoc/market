@@ -4,6 +4,8 @@ from .models import Product, Rating
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.db.models import Avg
+from orders.models import Cart, ProductInCart
+from django.db.models import F
 
 
 def products_list(request):
@@ -34,4 +36,31 @@ def rate_product(request, pk):
         rating, created = Rating.objects.get_or_create(product=product, user=request.user)
         rating.rating = rating_value
         rating.save()
+    return redirect('product_room', pk=pk)
+
+
+
+def add_to_cart(request, pk):
+    product = get_object_or_404(Product, id=pk)
+    quantity = int(request.POST.get('quantity', 1))
+
+    if quantity < 1:
+        messages.error(request, 'Недопустимое количество товара.')
+        return redirect('product_room', pk=pk)
+
+    # Получение или создание корзины пользователя
+    cart, created = Cart.objects.get_or_create(user=request.user)
+
+    # Получение или создание записи о товаре в корзине
+    try:
+        product_in_cart = ProductInCart.objects.get(cart=cart, product=product)
+        product_in_cart.quantity += quantity
+        product_in_cart.save(update_fields=['quantity'])
+    except ProductInCart.DoesNotExist:
+        product_in_cart = ProductInCart.objects.create(cart=cart, product=product, name=product.name, price=product.price, quantity=quantity)
+
+    cart.total_items += quantity
+    cart.total_price += (product.price * quantity)
+    cart.save()
+
     return redirect('product_room', pk=pk)

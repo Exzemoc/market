@@ -29,16 +29,16 @@
         {% else %}
             <p>Вы уже оценили этот товар.</p>
         {% endif %}
+
+        <div>
+            <form id="form_add_to_cart" method="POST" action="{% url 'add_to_cart' pk=product.id %}">
+                {% csrf_token %}
+                <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1">
+                <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+            </form>
+        </div>
     {% else %}
         <p>Чтобы оценить этот товар, пожалуйста, <a href="{% url 'login' %}">войдите</a>.</p>
     {% endif %}
-
-    <div>
-        <form id="form_buying_product" class="form-inline">
-            <input type="number" class="form-control">
-        </form>
-        <button type="submit" class="btn btn-success btb-buy">
-            Купить
-        </button>
-    </div>
 {% endblock %}
+
