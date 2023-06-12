@@ -17,6 +17,8 @@ class PruductView(DetailView):
     template_name = 'storage/product_room.html'
     context_object_name = 'product'
 
+
+#Вывод информации о товаре в комантау товара
 @login_required
 def product_detail(request, pk):
     product = Product.objects.get(id=pk)
@@ -29,6 +31,8 @@ def product_detail(request, pk):
     }
     return render(request, 'storage/product_room.html', context)
 
+
+# Добавление рейтинга товара
 def rate_product(request, pk):
     if request.method == 'POST':
         rating_value = int(request.POST['rating'])
@@ -40,6 +44,7 @@ def rate_product(request, pk):
 
 
 
+#Добавление нужного кол-во товара в корзину
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     quantity = int(request.POST.get('quantity', 1))
