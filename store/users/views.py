@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from .models import Wallet
 
 
 def register_view(request):
@@ -11,6 +12,7 @@ def register_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Wallet.objects.create(user=user)
             login(request, user)
             return redirect('home')
     else:
@@ -33,3 +35,15 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+
+# Выводит бланс пользователя
+def user_balance(request):
+    user = request.user
+    wallet = Wallet.objects.get(user=user)
+    balance = wallet.balance
+
+    context = {
+        'balance': balance
+    }
+    return render(request, 'users/balance.html', {'balance': balance})

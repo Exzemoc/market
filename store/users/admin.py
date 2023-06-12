@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import Wallet
 
 
-@admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ("email", 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser',)
+@admin.register(Wallet)
+class WalletAdmin(admin.ModelAdmin):
+    list_display = ('user', 'balance')
