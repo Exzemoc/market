@@ -40,8 +40,13 @@ def logout_view(request):
 # Выводит бланс пользователя
 def user_balance(request):
     user = request.user
-    wallet = Wallet.objects.get(user=user)
-    balance = wallet.balance
+
+    try:
+        wallet = Wallet.objects.get(user=user)
+        balance = wallet.balance
+    except Wallet.DoesNotExist:
+        # Обработка случая, когда кошелек не существует
+        balance = 0
 
     context = {
         'balance': balance

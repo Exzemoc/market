@@ -11,6 +11,7 @@ def cart_view(request):
     return render(request, 'orders/cart.html', context)
 
 
+# Представление оплаты
 def payment_view(request):
     user = request.user
     cart = Cart.objects.get(user=user)
@@ -23,7 +24,7 @@ def payment_view(request):
         payment = Payment.objects.create(user=user, amount=amount)
 
         cart.payment = payment
-        cart.save()
+        cart.delete()
 
         user.wallet.balance -= amount
         user.wallet.save()
