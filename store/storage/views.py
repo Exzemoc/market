@@ -18,7 +18,7 @@ class PruductView(DetailView):
     context_object_name = 'product'
 
 
-#Вывод информации о товаре в комантау товара
+# Вывод информации о товаре в комантау товара
 @login_required
 def product_detail(request, pk):
     product = Product.objects.get(id=pk)
@@ -43,8 +43,7 @@ def rate_product(request, pk):
     return redirect('product_room', pk=pk)
 
 
-
-#Добавление нужного кол-во товара в корзину
+# Добавление нужного кол-во товара в корзину
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     quantity = int(request.POST.get('quantity', 1))
@@ -62,7 +61,8 @@ def add_to_cart(request, pk):
         product_in_cart.quantity += quantity
         product_in_cart.save(update_fields=['quantity'])
     except ProductInCart.DoesNotExist:
-        product_in_cart = ProductInCart.objects.create(cart=cart, product=product, name=product.name, price=product.price, quantity=quantity)
+        product_in_cart = ProductInCart.objects.create(cart=cart, product=product, name=product.name,
+                                                       price=product.price, quantity=quantity)
 
     cart.total_items += quantity
     cart.total_price += (product.price * quantity)

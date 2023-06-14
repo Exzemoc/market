@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Онлайн барахолка</title>
+    <title>Онлайн магазин книг</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <script src="{% static 'js/script.js' %}"></script>
 </head>
@@ -17,13 +17,12 @@
             <li><a href="/products/">Товары</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Выход</a></li>
+            <li><a href="/users/balance/">Баланс: {{ balance }}</a></li>
+            <li><a href="/cart/">Корзина</a></li>
             {% else %}
            <li><a href="{% url 'register'%}">Регистрация</a></li>
            <li><a href="{% url 'login'%}">Войти</a></li>
-        {% endif %}
-            <li><a href="/cart/">Корзина</a></li>
-            <li><a href="/users/balance/">Баланс: {{ balance }}</a></li>
-
+            {% endif %}
     </nav>
 
     <main>
@@ -32,7 +31,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 Онлайн барахолка. Все права защищены.</p>
+        <p>&copy; 2023 Онлайн магазин книг. Все права защищены.</p>
     </footer>
 </body>
 </html>

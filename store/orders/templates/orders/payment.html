@@ -6,6 +6,15 @@
     <form method="post" action="{% url 'payment' %}">
         {% csrf_token %}
         <p>Сумма платежа: {{ cart.total_price }}</p>
-        <button type="submit">Оплатить</button>
+       <nav>
+            <ul>
+                <!-- ... остальные пункты меню -->
+                {% if user.wallet.balance > cart.total_price %}
+                    <button type="submit">Оплатить</button>
+                {% else %}
+                    <li><a href="/users/balance/">Недостаточно средств</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </form>
 {% endblock %}
