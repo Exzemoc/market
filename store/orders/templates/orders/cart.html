@@ -11,8 +11,9 @@
     </ul>
     <p>Общая стоимость: {{ cart.total_price }}</p>
     <p>Общее количетсво товаров: {{ cart.total_items }}</p>
+    <a href="/cart/delivery_choice/"><button class="btn btn-warning">Оплатить</button></a>
 {% else %}
     <p>Корзина пуста.</p>
 {% endif %}
-    <a href="/cart/payment/"><button class="btn btn-warning">Оплатить</button></a>
+
 {% endblock %}
