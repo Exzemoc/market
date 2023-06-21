@@ -9,6 +9,7 @@ class Wallet(models.Model):
     def __str__(self):
         return f"Wallet of {self.user.username}"
 
+
 class Order(models.Model):
     STATUS_CHOICES = (
         ('paid', 'Оплачено'),
@@ -19,6 +20,7 @@ class Order(models.Model):
     address = models.CharField(max_length=100)
     comment = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='unpaid')
+    all_name = models.CharField(max_length=100, default='')
 
 
     def __str__(self):
