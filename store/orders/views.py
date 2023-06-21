@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Cart, Payment
 from users.models import Order
+from orders.models import ProductInCart
 
 
 # Отображение корзины
@@ -48,13 +49,27 @@ def delivery_form(request):
         phone = request.POST.get('phone')
         address = request.POST.get('address')
         comment = request.POST.get('comment')
+        product_in_cart_list = ProductInCart.objects.filter(cart=request.user.cart)
 
-        # Создание объекта Order и сохранение данных в базе данных
-        order = Order(user=request.user, phone=phone, address=address, comment=comment)
+        order = Order.objects.create(
+            user=request.user,
+            phone=phone,
+            address=address,
+            comment=comment,
+            status='unpaid'
+        )
+
+        all_names = []
+        for product_in_cart in product_in_cart_list:
+            name = product_in_cart.name
+            quantity = product_in_cart.quantity
+            name_with_quantity = f'{name}: {quantity} шт.'
+            all_names.append(name_with_quantity)
+
+        all_names_str = ', '.join(all_names)
+        order.all_name = all_names_str
         order.save()
 
-        # Дополнительная логика или редирект после сохранения данных заказа
-
-        return redirect('payment')
+        return redirect('payment')  # Перенаправление на страницу оплаты
 
     return render(request, 'orders/delivery_form.html')

@@ -8,4 +8,4 @@ class WalletAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone', 'address', 'comment', 'status']
+    list_display = ['user', 'phone', 'address', 'comment', 'all_name', 'status']
