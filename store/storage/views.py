@@ -5,11 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.db.models import Avg
 from orders.models import Cart, ProductInCart
-from django.db.models import F
-
 
 def products_list(request):
-    return render(request, 'storage/products_list.html')
+    products = Product.objects.filter(is_active=True).order_by('-created')[:]
+    context = {'products': products}
+    return render(request, 'storage/products_list.html', context)
 
 
 class PruductView(DetailView):
