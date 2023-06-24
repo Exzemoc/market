@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Wallet, Order
-
+from orders.models import ProductInCart
 
 @admin.register(Wallet)
 class WalletAdmin(admin.ModelAdmin):

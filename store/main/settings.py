@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'storage',
     'users',
     'orders',
+    'staff_status',
 ]
 
 MIDDLEWARE = [

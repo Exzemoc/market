@@ -6,7 +6,7 @@
 {% if cart %}
     <ul>
     {% for item in cart.productincart_set.all %}
-        <p>{{ item.product.name }} - Количество: {{ item.quantity }} - Цена: {{ item.price }}</p>
+        <li>{{ item.product.name }} - Количество: {{ item.quantity }} - Цена: {{ item.price }}</li>
     {% endfor %}
     </ul>
     <p>Общая стоимость: {{ cart.total_price }}</p>

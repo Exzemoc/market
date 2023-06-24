@@ -1,0 +1,30 @@
+{% extends 'home/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+  <h1>Страница персонала</h1>
+  <ul>
+    {% for order in orders %}
+      <li>
+        Заказ пользователя: {{ order.user.username }}<br>
+        Телефон: {{ order.phone }}<br>
+        Адрес: {{ order.address }}<br>
+        Комментарий: {{ order.comment }}<br>
+        Корзина: {{ order.all_name }}<br>
+        Подтверждение заказа:
+        {% if not order.is_confirmed %}
+          <a href="{% url 'confirm_order' order.id %}">Подтвердить</a>
+        {% else %}
+          Подтверждено
+        {% endif %}<br>
+        Закрыть заказ:
+        {% if not order.is_closed %}
+          <a href="{% url 'close_order' order.id %}">Закрыть</a>
+        {% else %}
+          Закрыто
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
