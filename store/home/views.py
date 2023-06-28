@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from users.models import Wallet
 from storage.models import Product, ProductImage
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
+
 
 def home(request):
     return render(request,'home/home_page.html')
@@ -14,12 +17,18 @@ def home_product(request):
 
 
 # Вывод баланса для всех страниц
+
 def layout_view(request):
     user = request.user
     wallet = Wallet.objects.get(user=user)
     balance = wallet.balance
 
     context = {
-        'balance': balance
+        'balance': balance,
     }
-    return render(request, 'home/layout.html', {'balance': balance})
+    return render(request, 'home/layout.html', context)
+
+
+
+
+

@@ -1,0 +1,31 @@
+{% extends 'home/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<head>
+    <title>Создание товара</title>
+</head>
+<body>
+    <h1>Создание товара</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="name">Название:</label>
+        <input type="text" name="name" id="name" required><br><br>
+
+        <label for="price">Цена:</label>
+        <input type="number" name="price" id="price" min="0" step="0.01" required><br><br>
+
+        <label for="tip">Тип:</label>
+        <input type="text" name="tip" id="tip"><br><br>
+
+        <label for="description">Описание:</label><br>
+        <textarea name="description" id="description"></textarea><br><br>
+
+        <label for="image">Изображение:</label>
+        <input type="file" name="image" id="image" accept="image/*" required><br><br>
+
+        <input type="submit" value="Создать">
+    </form>
+</body>
+{% endblock %}
