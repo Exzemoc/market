@@ -71,3 +71,32 @@ def add_to_cart(request, pk):
     cart.save()
 
     return redirect('product_room', pk=pk)
+
+
+def home_product(request):
+    title = 'Список товаров'
+    latest_products = Product.objects.filter(is_active=True)
+
+    # Получение параметров фильтрации из запроса
+    date_release = request.GET.get('date_release')
+    tip = request.GET.get('tip')
+    name = request.GET.get('name')
+    price_from = request.GET.get('price_from')
+    price_to = request.GET.get('price_to')
+    # Применение фильтров, если они указаны
+
+    if date_release:
+        latest_products = latest_products.filter(date_release=date_release)
+    if tip:
+        latest_products = latest_products.filter(tip=tip)
+    if name:
+        latest_products = latest_products.filter(name__icontains=name)
+    if price_from:
+        latest_products = latest_products.filter(price__gte=price_from)
+    if price_to:
+        latest_products = latest_products.filter(price__lte=price_to)
+    context = {
+        'title': title,
+        'latest_products': latest_products,
+    }
+    return render(request, 'storage/products_list.html', context)
