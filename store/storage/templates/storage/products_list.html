@@ -1,18 +1,42 @@
-{% extends  'home/layout.html' %}
-{% block title %} {{title}} {% endblock %}
+{% extends 'home/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-    <div class="features">
-        <h1>{{title}}</h1>
-        {% for product in products %}
-        <div class="product">
-            <h3>{{ product.name }}</h3>
-            <p>Цена: {{ product.price }}</p>
-            <p>Тип: {{ product.tip }}</p>
-            <p>Описание: {{ product.description }}</p>
-            <img src="{{ product.productimage_set.first.image.url }}" alt="Фото товара">
-            <a href="{% url 'product_room' product.id %}" class="btn btn-warning">Подробнее<a/>
+    <div class="row">
+        <div class="col-md-3">
+            <form method="GET" action="{% url 'products_list' %}">
+                <h3>Фильтр</h3>
+                <label for="date_release">Дата издания:</label>
+                <input type="number" name="date_release" value="{{ request.GET.date_release }}"><br>
+                <label for="tip">Жанр:</label>
+                <input type="text" name="tip" value="{{ request.GET.tip }}"><br>
+                <label for="name">Название:</label>
+                <input type="text" name="name" value="{{ request.GET.name }}"><br>
+                <label for="price_from">Цена от:</label>
+                <input type="number" name="price_from"><br>
+                <label for="price_to">Цена до:</label>
+                <input type="number" name="price_to"><br>
+                <button type="submit">Фильтровать</button>
+            </form>
         </div>
-        {% endfor %}
+        <div class="col-md-9">
+            <div class="features">
+                <h1>{{ title }}</h1>
+                {% for product in latest_products %}
+                    <div class="product">
+                        <h3>{{ product.name }}</h3>
+                        <p>Цена: {{ product.price }}</p>
+                        <p>Дата издания: {{ product.date_release }}</p>
+                        <p>Жанр: {{ product.tip }}</p>
+                        <p>Описание: {{ product.description }}</p>
+                        {% for image in product.productimage_set.all %}
+                            <img src="{{ image.image.url }}" alt="Фото товара">
+                        {% endfor %}
+                        <a href="{% url 'product_room' product.id %}" class="btn btn-warning">Подробнее</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}
