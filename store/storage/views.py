@@ -6,6 +6,10 @@ from django.shortcuts import redirect
 from django.db.models import Avg
 from orders.models import Cart, ProductInCart
 from django.db.models import F
+from rest_framework import viewsets
+from .serializers import ProductSerializer
+
+
 
 
 def products_list(request):
@@ -100,3 +104,8 @@ def home_product(request):
         'latest_products': latest_products,
     }
     return render(request, 'storage/products_list.html', context)
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
