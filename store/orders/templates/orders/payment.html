@@ -10,7 +10,7 @@
             <ul>
                 <!-- ... остальные пункты меню -->
                 {% if user.wallet.balance > cart.total_price %}
-                    <button type="submit">Оплатить</button>
+                    <button type="submit" class="filter-button">Оплатить</button>
                 {% else %}
                     <li><a href="/users/balance/">Недостаточно средств</a></li>
                 {% endif %}

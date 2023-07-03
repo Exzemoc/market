@@ -14,13 +14,13 @@
         Корзина: {{ order.all_name }}<br>
         Подтверждение заказа:
         {% if not order.is_confirmed %}
-          <a href="{% url 'confirm_order' order.id %}">Подтвердить</a>
+          <a href="{% url 'confirm_order' order.id %}"><button class="filter-button">Подтвердить</button></a>
         {% else %}
           Подтверждено
         {% endif %}<br>
         Закрыть заказ:
         {% if not order.is_closed %}
-          <a href="{% url 'close_order' order.id %}">Закрыть</a>
+          <a href="{% url 'close_order' order.id %}"><button class="filter-button">Закрыть</button></a>
         {% else %}
           Закрыто
         {% endif %}

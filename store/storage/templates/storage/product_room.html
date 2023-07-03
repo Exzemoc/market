@@ -29,7 +29,7 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <button type="submit">Оценить</button>
+                <button type="submit" class="filter-button">Оценить</button>
             </form>
         {% else %}
             <p>Вы уже оценили этот товар.</p>
@@ -39,7 +39,7 @@
             <form id="form_add_to_cart" method="POST" action="{% url 'add_to_cart' pk=product.id %}">
                 {% csrf_token %}
                 <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1">
-                <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+                <button type="submit" class="filter-button">Добавить в корзину</button>
             </form>
         </div>
     {% else %}
