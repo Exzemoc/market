@@ -4,18 +4,20 @@
 
 {% block content %}
     <div class="features">
-        <h1>{{ title }}</h1>
+       <div class="features text-center">
+                <h1>Новинки</h1>
         {% for product in latest_products %}
             <div class="product">
                 <h3>{{ product.name }}</h3>
                 <p>Цена: {{ product.price }}</p>
                 <p>Дата издания: {{ product.date_release }}</p>
+                <p>Средний рейтинг: {{ product.average_rating }}</p>
                 <p>Жанр: {{ product.tip }}</p>
                 <p>Описание: {{ product.description }}</p>
                 {% for image in product.productimage_set.all %}
                     <img src="{{ image.image.url }}" alt="Фото товара">
                 {% endfor %}
-                <a href="{% url 'product_room' product.id %}" class="btn btn-warning">Подробнее</a>
+                <a href="{% url 'product_room' product.id %}"><button class="filter-button">Подробнее</button></a>
             </div>
         {% endfor %}
     </div>

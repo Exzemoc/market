@@ -1,8 +1,11 @@
+from django.db.models import Avg
 from django.shortcuts import render, redirect
 from users.models import Wallet
-from storage.models import Product, ProductImage
+from storage.models import Product, ProductImage, Rating
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+
+
 
 
 def home(request):
@@ -28,6 +31,14 @@ def layout_view(request):
     return render(request, 'home/layout.html', context)
 
 
+def product_detail(request, pk):
+    product = Product.objects.get(id=pk)
+    average_rating = Rating.objects.filter(product=product).aggregate(Avg('rating'))['rating__avg']
+    context = {
+        'product': product,
+        'average_rating': average_rating,
+    }
+    return render(request, 'home/home_page.html', context)
 
 
 

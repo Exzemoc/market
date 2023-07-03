@@ -5,7 +5,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-3">
-            <form method="GET" action="{% url 'products_list' %}">
+            <form method="GET" action="{% url 'products_list' %}" class="sticky-top">
                 <h3>Фильтр</h3>
                 <label for="date_release">Дата издания:</label>
                 <input type="number" name="date_release" value="{{ request.GET.date_release }}"><br>
@@ -17,11 +17,11 @@
                 <input type="number" name="price_from"><br>
                 <label for="price_to">Цена до:</label>
                 <input type="number" name="price_to"><br>
-                <button type="submit">Фильтровать</button>
+                <h5><button type="submit" class="filter-button">Фильтровать</button></h5>
             </form>
         </div>
         <div class="col-md-9">
-            <div class="features">
+            <div class="features text-center">
                 <h1>{{ title }}</h1>
                 {% for product in latest_products %}
                     <div class="product">
@@ -33,7 +33,8 @@
                         {% for image in product.productimage_set.all %}
                             <img src="{{ image.image.url }}" alt="Фото товара">
                         {% endfor %}
-                        <a href="{% url 'product_room' product.id %}" class="btn btn-warning">Подробнее</a>
+                        <a href="{% url 'product_room' product.id %}"><button class="filter-button">Подробнее</button></a>
+
                     </div>
                 {% endfor %}
             </div>

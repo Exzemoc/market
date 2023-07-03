@@ -1,55 +1,280 @@
-/* Стили для шапки */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
+  background-color: #262626;
+  color: #fff;
+  padding: 10px;
 }
 
 header h1 {
-    margin: 0;
+  margin: 0;
 }
 
 /* Стили для навигации */
 nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #f1f1f1;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
 }
 
 nav ul li {
-    display: inline-block;
+  display: inline-block;
 }
 
 nav ul li a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #262626;
 }
 
 nav ul li a:hover {
-    background-color: #ccc;
+  background-color: #808080;
 }
-img
+
 /* Стили для основного содержимого */
 main {
-    padding: 20px;
+  padding: 20px;
 }
 
 /* Стили для подвала */
 footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+  bottom: 0;
+  width: 100%;
+  background-color: #262626;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
 }
 
 /* Стили для ссылок */
 a {
-    color: #333;
+  color: #fff;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+.nav {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-item {
+  margin-right: 10px;
+}
+
+.nav-link {
+  color: white !important;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: white !important;
+  text-decoration: none;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product {
+  width: 300px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+}
+
+.product h3 {
+  margin-top: 0;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.filter-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #262626;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.filter-button:hover {
+  background-color: #808080;
+  text-decoration: none;
+  color: #fff
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* CSS для фильтра */
+.col-md-3 {
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+form h3,
+h5 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  padding-left: 10px; /* Добавление отступа слева */
+}
+
+input[type="number"],
+input[type="text"] {
+  width: 100%; /* Ширина 100% для растяжения на всю доступную ширину */
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* Выравнивание input в одну вертикаль */
+form > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+form > div label {
+  flex-basis: 20%; /* Ширина 30% для метки */
+}
+
+form > div input {
+  flex-grow: 1; /* Растяжение input на оставшуюся ширину */
+}
+
+button[type="submit"] {
+  background-color: #262626;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* CSS для списка товаров */
+.col-md-9 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.features h1 {
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.product {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  width: 300px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.product p {
+  margin-bottom: 5px;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Обновленный код */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  background-color: #262626;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

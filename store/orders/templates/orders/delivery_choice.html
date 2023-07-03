@@ -3,9 +3,7 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-    <h2>Выберите способ доставки:</h2>
     <ul>
-        <li><a>Скачать файл</a></li>
-        <li><a href="/cart/delivery_form/">Оформить доставку на дом</a></li>
+        <a href="/cart/delivery_form/"><button class="filter-button">Оформить доставку</button></a>
     </ul>
 {% endblock %}

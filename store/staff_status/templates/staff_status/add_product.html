@@ -5,6 +5,7 @@
 {% block content %}
 <head>
     <title>Создание товара</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
 </head>
 <body>
     <h1>Создание товара</h1>
@@ -28,7 +29,7 @@
         <label for="image">Изображение:</label>
         <input type="file" name="image" id="image" accept="image/*" required><br><br>
 
-        <input type="submit" value="Создать">
+        <button type="submit" class="filter-button">Создать</button>
     </form>
 </body>
 {% endblock %}
