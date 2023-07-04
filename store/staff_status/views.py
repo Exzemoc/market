@@ -71,3 +71,16 @@ def create_product(request):
         return HttpResponse('У вас нет доступа к этой странице.')
 
     return render(request, 'staff_status/add_product.html')
+
+
+def delete_products_list(request):
+    latest_products = Product.objects.filter(is_active=True).order_by('-created')[:]
+    context = {'latest_products': latest_products}
+    return render(request, 'staff_status/delete_product.html', context)
+
+
+def delete_product(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    product.delete()
+    return redirect('delete_product_list')
+

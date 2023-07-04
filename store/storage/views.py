@@ -10,22 +10,14 @@ from rest_framework import viewsets
 from .serializers import ProductSerializer
 
 
-
-
 def products_list(request):
     products = Product.objects.filter(is_active=True).order_by('-created')[:]
     context = {'products': products}
     return render(request, 'storage/products_list.html', context)
 
 
-class PruductView(DetailView):
-    model = Product
-    template_name = 'storage/product_room.html'
-    context_object_name = 'product'
-
-
 # Вывод информации о товаре в комантау товара
-@login_required
+@login_required(login_url='/users/login/')
 def product_detail(request, pk):
     product = Product.objects.get(id=pk)
     already_rated = Rating.objects.filter(product=product, user=request.user).exists()
@@ -53,10 +45,6 @@ def rate_product(request, pk):
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     quantity = int(request.POST.get('quantity', 1))
-
-    if quantity < 1:
-        messages.error(request, 'Недопустимое количество товара.')
-        return redirect('product_room', pk=pk)
 
     # Получение или создание корзины пользователя
     cart, created = Cart.objects.get_or_create(user=request.user)

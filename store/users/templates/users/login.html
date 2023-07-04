@@ -5,6 +5,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="filter-button">Войти</button>
+    <button class="filter-button">Войти</button>
+    <a href="/users/register/" class="filter-button">Зарегистрироваться</a>
 </form>
 {% endblock %}

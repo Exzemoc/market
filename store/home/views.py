@@ -2,10 +2,6 @@ from django.db.models import Avg
 from django.shortcuts import render, redirect
 from users.models import Wallet
 from storage.models import Product, ProductImage, Rating
-from django.contrib.auth.models import Group
-from django.contrib.auth.models import User
-
-
 
 
 def home(request):
