@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Cart, Payment
 from users.models import Order
@@ -73,3 +73,25 @@ def delivery_form(request):
         return redirect('payment')  # Перенаправление на страницу оплаты
 
     return render(request, 'orders/delivery_form.html')
+
+
+def clear_cart(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user).first()
+    if cart:
+        cart.productincart_set.all().delete()
+        # Обновить значения total_items и total_price в модели Cart
+        cart.total_items = 0
+        cart.total_price = 0
+        cart.save()
+    return redirect('cart')
+
+
+def remove_from_cart(request, item_id):
+    item = get_object_or_404(ProductInCart, id=item_id)
+    cart = item.cart
+    item.delete()
+    # Обновить значения total_items и total_price в модели Cart
+    cart.update_totals()
+    cart.save()
+    return redirect('cart')

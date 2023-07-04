@@ -29,7 +29,6 @@
                         <p>Цена: {{ product.price }}</p>
                         <p>Дата издания: {{ product.date_release }}</p>
                         <p>Жанр: {{ product.tip }}</p>
-                        <p>Описание: {{ product.description }}</p>
                         {% for image in product.productimage_set.all %}
                             <img src="{{ image.image.url }}" alt="Фото товара">
                         {% endfor %}

@@ -22,6 +22,8 @@ def product_detail(request, pk):
     product = Product.objects.get(id=pk)
     already_rated = Rating.objects.filter(product=product, user=request.user).exists()
     average_rating = Rating.objects.filter(product=product).aggregate(Avg('rating'))['rating__avg']
+
+
     context = {
         'product': product,
         'already_rated': already_rated,
