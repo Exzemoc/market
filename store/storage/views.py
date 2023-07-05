@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView
-from .models import Product, Rating
+from .models import Product, Rating, ProductImage
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.db.models import Avg
 from orders.models import Cart, ProductInCart
 from django.db.models import F
 from rest_framework import viewsets
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, RatingSerializer, ProductImageSerializer
 
 
 def products_list(request):
@@ -96,6 +96,19 @@ def home_product(request):
     return render(request, 'storage/products_list.html', context)
 
 
+#API для списка продуктов
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+#API для рейтинга
+class RatingViewSet(viewsets.ModelViewSet):
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+
+
+#API для фото продуктов
+class ProductImageViewSet(viewsets.ModelViewSet):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageSerializer
