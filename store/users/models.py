@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from orders.models import ProductInCart
-
 
 
 class Wallet(models.Model):
@@ -28,6 +26,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Заказ пользователя {self.user.username}, Статус: {self.get_status_display()}"
+
 
 
 

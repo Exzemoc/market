@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Cart, Payment
 from users.models import Order
 from orders.models import ProductInCart
+from .serializers import PaymentSerializer, CartSerializer, ProductInCartSerializer
+from rest_framework import viewsets
 
 
 # Отображение корзины
@@ -95,3 +97,18 @@ def remove_from_cart(request, item_id):
     cart.update_totals()
     cart.save()
     return redirect('cart')
+
+
+class PaymentViewSet(viewsets.ModelViewSet):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+
+
+class ProductInCartViewSet(viewsets.ModelViewSet):
+    queryset = ProductInCart.objects.all()
+    serializer_class = ProductInCartSerializer

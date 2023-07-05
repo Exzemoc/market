@@ -4,7 +4,10 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from .models import Wallet
+from .models import Wallet, Order
+from .serializers import WalletSerializer, OrderSerializer, UserSerializer
+from rest_framework import viewsets
+from django.contrib.auth.models import User
 
 
 def register_view(request):
@@ -52,3 +55,24 @@ def user_balance(request):
         'balance': balance
     }
     return render(request, 'users/balance.html', {'balance': balance})
+
+
+#API баланса
+class WalletViewSet(viewsets.ModelViewSet):
+    queryset = Wallet.objects.all()
+    serializer_class = WalletSerializer
+
+
+#API доставки
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+#API юзеров
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+
