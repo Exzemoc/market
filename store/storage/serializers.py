@@ -5,7 +5,7 @@ from .models import Product, Rating, ProductImage
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
+        exclude = ['cart', 'is_active', 'created', 'updated' ]
 
 
 class RatingSerializer(serializers.ModelSerializer):
