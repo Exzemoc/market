@@ -1,13 +1,20 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import *
 
+
+router = DefaultRouter()
+router.register(r'products', ProductViewsSet, basename='product')
+router.register(r'ratings', RatingViewsSet, basename='rating')
+router.register(r'product_images', ProductImageViewsSet, basename='product_image')
+router.register(r'wallets', WalletViewsSet, basename='wallet')
+router.register(r'orders', OrderViewsSet, basename='order')
+router.register(r'users', UserViewsSet, basename='user')
+router.register(r'payments', PaymentViewsSet, basename='payment')
+router.register(r'carts', CartViewsSet, basename='cart')
+router.register(r'products_in_cart', ProductInCartViewsSet, basename='product_in_cart')
 
 urlpatterns = [
-    path('home/', views.HomeView.as_view(), name='home_api'),
-    path('products_list/', views.ProductListView.as_view(), name='product_list_api'),
-    path('user_balance/', views.UserBalanceAPIView.as_view(), name='user_balance_api'),
-    path('cart/', views.CartView.as_view(), name='cart_api'),
-    path('products_room/<int:product_id>/', views.ProductView.as_view(), name='products_room_api'),
-    path('delivery_form/', views.OrderCreateView.as_view(), name='delivery_form_api'),
-    path('payment/', views.PaymentConfirmationView.as_view(), name='payment_api'),
+    path('home/', HomeView.as_view(), name='home_api'),
+    path('', include(router.urls)),
 ]
