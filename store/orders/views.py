@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Cart, Payment
 from users.models import Order
 from orders.models import ProductInCart
-from rest_framework import viewsets
 
 
 # Отображение корзины
+@login_required(login_url='/users/login/')
 def cart_view(request):
     user = request.user
     cart = Cart.objects.filter(user=user).first()
@@ -15,6 +15,7 @@ def cart_view(request):
 
 
 # Представление оплаты
+@login_required(login_url='/users/login/')
 def payment_view(request):
     user = request.user
     cart = Cart.objects.get(user=user)
@@ -41,10 +42,13 @@ def payment_view(request):
 
     return render(request, 'orders/payment.html', {'cart': cart})
 
+
+@login_required(login_url='/users/login/')
 def delivery_choice(request):
-    return render(request,'orders/delivery_choice.html')
+    return render(request, 'orders/delivery_choice.html')
 
 
+@login_required(login_url='/users/login/')
 def delivery_form(request):
     if request.method == 'POST':
         phone = request.POST.get('phone')
@@ -76,6 +80,7 @@ def delivery_form(request):
     return render(request, 'orders/delivery_form.html')
 
 
+@login_required(login_url='/users/login/')
 def clear_cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user).first()
@@ -88,6 +93,7 @@ def clear_cart(request):
     return redirect('cart')
 
 
+@login_required(login_url='/users/login/')
 def remove_from_cart(request, item_id):
     item = get_object_or_404(ProductInCart, id=item_id)
     cart = item.cart

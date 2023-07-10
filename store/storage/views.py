@@ -28,6 +28,7 @@ def product_detail(request, pk):
 
 
 # Добавление рейтинга товара
+@login_required(login_url='/users/login/')
 def rate_product(request, pk):
     if request.method == 'POST':
         rating_value = int(request.POST['rating'])
@@ -39,6 +40,7 @@ def rate_product(request, pk):
 
 
 # Добавление нужного кол-во товара в корзину
+@login_required(login_url='/users/login/')
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     quantity = int(request.POST.get('quantity', 1))
@@ -62,6 +64,7 @@ def add_to_cart(request, pk):
     return redirect('product_room', pk=pk)
 
 
+@login_required(login_url='/users/login/')
 def home_product(request):
     title = 'Список товаров'
     latest_products = Product.objects.filter(is_active=True)
