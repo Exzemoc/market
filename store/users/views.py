@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
@@ -31,12 +32,14 @@ def login_view(request):
     return render(request, 'users/login.html', {'form': form})
 
 
+@login_required(login_url='/users/login/')
 def logout_view(request):
     logout(request)
     return redirect('/')
 
 
 # Выводит бланс пользователя
+@login_required(login_url='/users/login/')
 def user_balance(request):
     user = request.user
 

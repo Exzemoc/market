@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.shortcuts import render, redirect
 from users.models import Wallet
@@ -27,6 +28,7 @@ def layout_view(request):
     return render(request, 'home/layout.html', context)
 
 
+@login_required(login_url='/users/login/')
 def product_detail(request, pk):
     product = Product.objects.get(id=pk)
     average_rating = Rating.objects.filter(product=product).aggregate(Avg('rating'))['rating__avg']

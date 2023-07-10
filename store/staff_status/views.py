@@ -8,12 +8,11 @@ from django.http import HttpResponse
 from storage.models import Product, ProductImage
 
 
-
-@login_required
+@login_required(login_url='/users/login/')
 def staff_page(request):
     # Получение всех заказов
     user = request.user
-    if user.is_staff:
+    if user.is_superuser:
         orders = Order.objects.all()
         context = {
             'orders': orders
@@ -23,23 +22,34 @@ def staff_page(request):
         return HttpResponse('У вас нет доступа к этой странице.')
 
 
+@login_required(login_url='/users/login/')
 def confirm_order(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    order.is_confirmed = True
-    order.save()
-    return redirect('staff_orders')
+    user = request.user
+    if user.is_superuser:
+        order = get_object_or_404(Order, id=order_id)
+        order.is_confirmed = True
+        order.save()
+        return redirect('staff_orders')
+    else:
+        return HttpResponse('У вас нет доступа к этой странице.')
 
 
+@login_required(login_url='/users/login/')
 def close_order(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    order.delete()
-    return redirect('staff_orders')
+    user = request.user
+    if user.is_superuser:
+        order = get_object_or_404(Order, id=order_id)
+        order.delete()
+        return redirect('staff_orders')
+    else:
+        return HttpResponse('У вас нет доступа к этой странице.')
 
 
+@login_required(login_url='/users/login/')
 def create_product(request):
 
     user = request.user
-    if user.is_staff:
+    if user.is_superuser:
 
         if request.method == 'POST':
             name = request.POST.get('name')
@@ -73,14 +83,23 @@ def create_product(request):
     return render(request, 'staff_status/add_product.html')
 
 
+@login_required(login_url='/users/login/')
 def delete_products_list(request):
-    latest_products = Product.objects.filter(is_active=True).order_by('-created')[:]
-    context = {'latest_products': latest_products}
-    return render(request, 'staff_status/delete_product.html', context)
+    user = request.user
+    if user.is_superuser:
+        latest_products = Product.objects.filter(is_active=True).order_by('-created')[:]
+        context = {'latest_products': latest_products}
+        return render(request, 'staff_status/delete_product.html', context)
+    else:
+        return HttpResponse('У вас нет доступа к этой странице.')
 
 
+@login_required(login_url='/users/login/')
 def delete_product(request, product_id):
-    product = Product.objects.get(pk=product_id)
-    product.delete()
-    return redirect('delete_product_list')
-
+    user = request.user
+    if user.is_superuser:
+        product = Product.objects.get(pk=product_id)
+        product.delete()
+        return redirect('delete_product_list')
+    else:
+        return HttpResponse('У вас нет доступа к этой странице.')
