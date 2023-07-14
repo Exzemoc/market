@@ -12,6 +12,7 @@
         Адрес: {{ order.address }}<br>
         Комментарий: {{ order.comment }}<br>
         Корзина: {{ order.all_name }}<br>
+        Статус: {{ order.status }}<br>
         Подтверждение заказа:
         {% if not order.is_confirmed %}
           <a href="{% url 'confirm_order' order.id %}"><button class="filter-button">Подтвердить</button></a>
