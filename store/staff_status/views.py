@@ -103,3 +103,16 @@ def delete_product(request, product_id):
         return redirect('delete_product_list')
     else:
         return HttpResponse('У вас нет доступа к этой странице.')
+
+
+def courier_page(request):
+    user = request.user
+    if user.is_staff:
+        orders = Order.objects.filter(is_confirmed=True)
+        context = {
+            'orders': orders
+        }
+        return render(request, 'staff_status/courier_orders.html', context)
+    else:
+        return HttpResponse('У вас нет доступа к этой странице.')
+
