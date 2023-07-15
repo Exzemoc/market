@@ -13,7 +13,13 @@
         Комментарий: {{ order.comment }}<br>
         Корзина: {{ order.all_name }}<br>
         Статус: {{ order.status }}<br>
-        <button class="filter-button">Принять в доставку</button>
+        {% if order.delivery_status == 'pending' %}
+          <button class="filter-button" onclick="location.href='{% url 'accept_delivery' order.id %}'">Принять в доставку</button>
+        {% elif order.delivery_status == 'in_transit' %}
+          <button class="filter-button" onclick="location.href='{% url 'close_delivery' order.id %}'">Товар доставлен</button>
+        {% elif order.delivery_status == 'delivered' %}
+          Товар доставлен
+        {% endif %}
       </li>
     {% endfor %}
   </ul>

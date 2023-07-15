@@ -19,6 +19,7 @@
         {% else %}
           Подтверждено
         {% endif %}<br>
+        Статус доставки: {{ order.delivery_status }}<br>
         Закрыть заказ:
         {% if not order.is_closed %}
           <a href="{% url 'close_order' order.id %}"><button class="filter-button">Закрыть</button></a>

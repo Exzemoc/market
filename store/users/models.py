@@ -24,6 +24,13 @@ class Order(models.Model):
     is_closed = models.BooleanField(default=False)
     all_name = models.CharField(max_length=100, default='')
 
+    DELIVERY_STATUS_CHOICES = (
+        ('pending', 'Ожидает доставки'),
+        ('in_transit', 'В пути'),
+        ('delivered', 'Доставлен'),
+    )
+
+    delivery_status = models.CharField(max_length=20, choices=DELIVERY_STATUS_CHOICES, default='pending')
     def __str__(self):
         return f"Заказ пользователя {self.user.username}, Статус: {self.get_status_display()}"
 
