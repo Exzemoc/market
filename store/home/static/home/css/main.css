@@ -108,23 +108,7 @@ a:hover {
   text-align: center;
 }
 
-.product {
-  width: 300px;
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-radius: 5px;
-}
 
-.product h3 {
-  margin-top: 0;
-}
-
-.product img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 5px;
-}
 
 .filter-button {
   display: inline-block;
@@ -168,7 +152,7 @@ main {
 
 /* CSS для фильтра */
 .col-md-3 {
-  width: 100px;
+  width: 90px;
   padding: 10px;
   border-radius: 5px;
 }
@@ -232,13 +216,14 @@ button[type="submit"] {
 }
 
 .product {
-  background-color: rgba(128, 128, 128, 0.1)
-  padding: 20px;
-  margin: 10px;
-  border-radius: 5px;
   width: 300px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product:hover {
