@@ -116,3 +116,16 @@ def courier_page(request):
     else:
         return HttpResponse('У вас нет доступа к этой странице.')
 
+
+def accept_delivery(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.delivery_status = 'in_transit'
+    order.save()
+    return redirect('courier_orders')
+
+
+def close_delivery(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.delivery_status = 'delivered'
+    order.save()
+    return redirect('courier_orders')

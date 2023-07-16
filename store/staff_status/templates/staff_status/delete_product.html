@@ -3,9 +3,9 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+   <h1>Удаление товаров</h1>
    <div class="col-md-9">
       <div class="features text-center">
-         <h1>Удаление товаров</h1>
          {% for product in latest_products %}
          <div class="product">
             <h3>{{ product.name }}</h3>

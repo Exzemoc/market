@@ -1,3 +1,15 @@
+.site-header {
+  background-color: #2b2b2b;
+  padding: 20px;
+  text-align: center;
+}
+
+.site-header h1 {
+  font-size: 32px;
+  color: #ffffff;
+  margin: 0;
+}
+
 header {
   background-color: #262626;
   color: #fff;
@@ -10,25 +22,36 @@ header h1 {
 
 /* Стили для навигации */
 nav ul {
-  list-style-type: none;
+  list-style: none;
   margin: 0;
   padding: 0;
-  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  background-color: #333;
 }
 
 nav ul li {
-  display: inline-block;
+  margin: 0 10px;
 }
 
 nav ul li a {
   display: block;
-  padding: 10px;
+  padding: 10px 20px;
   text-decoration: none;
-  color: #262626;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
 nav ul li a:hover {
-  background-color: #808080;
+  color: #ff0066;
+  background-color: #4d4d4d;
+}
+
+nav ul li.active a {
+  color: #ff0066;
+  background-color: #fff;
+  border-radius: 4px;
 }
 
 /* Стили для основного содержимого */
@@ -82,6 +105,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  text-align: center;
 }
 
 .product {
@@ -104,18 +128,26 @@ a:hover {
 
 .filter-button {
   display: inline-block;
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #262626;
-  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   text-decoration: none;
-  border-radius: 5px;
+  color: #ffffff;
+  background-color: #262626;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5;
 }
 
 .filter-button:hover {
-  background-color: #808080;
+  background-color: #4b4b4b;
   text-decoration: none;
-  color: #fff
+  color: #ffffff;
+}
+
+.filter-button:active {
+  transform: scale(0.9);
 }
 
 html,
@@ -194,33 +226,44 @@ button[type="submit"] {
   margin-top: 10px;
   width: 100%;
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
 }
 
 .product {
-  background-color: #f9f9f9;
-  padding: 10px;
+  background-color: rgba(128, 128, 128, 0.1)
+  padding: 20px;
   margin: 10px;
   border-radius: 5px;
   width: 300px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.product:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
 }
 
 .product h3 {
   font-size: 18px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  color: #333333;
 }
 
 .product p {
   margin-bottom: 5px;
+  color: #666666;
 }
 
 .product img {
   width: 100%;
   height: auto;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 
-/* Обновленный код */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.5;
@@ -338,3 +381,52 @@ input[type="password"] {
   top: 10px;
   right: 10px;
 }
+.order-list {
+  list-style: none;
+  padding: 0;
+}
+
+.order-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.order-item {
+  width: 300px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.order-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.order-details {
+  margin-bottom: 10px;
+}
+
+.order-details p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-actions p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+
