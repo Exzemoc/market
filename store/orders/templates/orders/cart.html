@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>Корзина</h1>
-    {% if cart %}
+    {% if cart.total_items is not 0 %}
         <ul>
         {% for item in cart.productincart_set.all %}
             <li>
@@ -17,6 +17,6 @@
         <a href="{% url 'clear_cart' %}"><button class="filter-button">Очистить корзину</button></a>
         <a href="/cart/delivery_choice/"><button class="filter-button">Оплатить</button></a>
     {% else %}
-        <p>Корзина пуста.</p>
+        <h4>Корзина пуста.</h4>
     {% endif %}
 {% endblock %}
