@@ -108,8 +108,6 @@ a:hover {
   text-align: center;
 }
 
-
-
 .filter-button {
   display: inline-block;
   padding: 10px 20px;
@@ -217,8 +215,7 @@ button[type="submit"] {
 
 .product {
   width: 300px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 10px auto;
   padding: 10px;
   background-color: #f9f9f9;
   border-radius: 5px;

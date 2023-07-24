@@ -8,7 +8,7 @@
         {% for image in product.productimage_set.all %}
         <img src="{{ image.image.url }}" alt="Фото товара">
         {% endfor %}
-        <p>Цена: {{ product.price }}</p>
+        <h5>Цена: {{ product.price }}</h5>
         <p>Дата издания: {{ product.date_release }}</p>
         <p>Жанр: {{ product.tip }}</p>
         <p>Описание: {{ product.description }}</p>
@@ -46,4 +46,3 @@
         <p>Чтобы оценить этот товар, пожалуйста, <a href="{% url 'login' %}">войдите</a>.</p>
     {% endif %}
 {% endblock %}
-
