@@ -64,7 +64,6 @@ def add_to_cart(request, pk):
     return redirect('product_room', pk=pk)
 
 
-@login_required(login_url='/users/login/')
 def home_product(request):
     title = 'Список товаров'
     latest_products = Product.objects.filter(is_active=True)
