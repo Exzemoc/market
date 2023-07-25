@@ -39,7 +39,38 @@
             <form id="form_add_to_cart" method="POST" action="{% url 'add_to_cart' pk=product.id %}">
                 {% csrf_token %}
                 <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1">
-                <button type="submit" class="filter-button">Добавить в корзину</button>
+                <div>
+        <button class="add-to-cart-button filter-button" data-product-id="{{ product.id }}">Добавить в корзину</button>
+        <div id="cart-message" style="display: none;">Товар добавлен в корзину</div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.add-to-cart-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+
+                fetch('/add_to_cart/' + productId + '/')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            showCartMessage();
+                        } else {
+                            alert('Произошла ошибка при добавлении товара в корзину.');
+                        }
+                    });
+            });
+        });
+
+        function showCartMessage() {
+            const cartMessage = document.getElementById('cart-message');
+            cartMessage.style.display = 'block';
+
+            setTimeout(function() {
+                cartMessage.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+
             </form>
         </div>
     {% else %}

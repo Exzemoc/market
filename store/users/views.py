@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from .models import Wallet
+from .models import Wallet, PurchaseHistory
 
 
 def register_view(request):
@@ -50,10 +50,13 @@ def user_balance(request):
         # Обработка случая, когда кошелек не существует
         balance = 0
 
+    purchase_history = PurchaseHistory.objects.filter(user=user)
+
     context = {
-        'balance': balance
+        'balance': balance,
+        'purchase_history': purchase_history
     }
-    return render(request, 'users/balance.html', {'balance': balance})
+    return render(request, 'users/balance.html', context)
 
 
 

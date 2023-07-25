@@ -14,8 +14,8 @@
           <p><strong>Адрес:</strong> {{ order.address }}</p>
           <p><strong>Комментарий:</strong> {{ order.comment }}</p>
           <p><strong>Корзина:</strong> {{ order.all_name }}</p>
-          <p><strong>Статус:</strong> {{ order.status }}</p>
-          <p><strong>Статус доставки:</strong> {{ order.delivery_status }}</p><br>
+          <p><strong>Статус:</strong> {{ order.get_status_display_ru }}</p>
+          <p><strong>Статус доставки:</strong> {{ order.get_delivery_status_display_ru }}</p><br>
         </div>
         <div class="order-actions">
           {% if not order.is_confirmed %}

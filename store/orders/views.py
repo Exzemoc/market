@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Cart, Payment
-from users.models import Order
+from users.models import Order, PurchaseHistory, create_purchase_history
 from orders.models import ProductInCart
 
 
@@ -37,6 +37,8 @@ def payment_view(request):
 
         order.status = 'paid'
         order.save()
+
+        create_purchase_history(user, amount)
 
         return redirect('home')
 

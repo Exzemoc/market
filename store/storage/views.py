@@ -91,3 +91,5 @@ def home_product(request):
         'latest_products': latest_products,
     }
     return render(request, 'storage/products_list.html', context)
+
+

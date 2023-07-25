@@ -1,8 +1,20 @@
-{% extends  'home/layout.html' %}
-{% block title %} {{title}} {% endblock %}
+{% extends 'home/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<h1>Ваш баланс</h1>
-<h4>Баланс: {{ balance }}</h4>
+  <h1>Ваш баланс</h1>
+  <h4>Баланс: {{ balance }}</h4>
 
+  <h2>История покупок</h2>
+  {% if purchase_history %}
+    {% for entry in purchase_history %}
+      <p>Дата покупки: {{ entry.purchase_date }}</p>
+      <p>Потраченная сумма: {{ entry.spent_amount }}</p>
+      <p>Товары: {{ entry.all_name }}</p>
+      <hr>
+    {% endfor %}
+  {% else %}
+    <p>Покупок еще не было</p>
+  {% endif %}
 {% endblock %}
