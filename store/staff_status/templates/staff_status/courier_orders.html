@@ -1,0 +1,30 @@
+{% extends 'home/layout.html' %}
+
+{% block title %}Заказы курьера{% endblock %}
+
+{% block content %}
+
+  <h1>Страница заказов курьера</h1>
+  <ul class="order-list">
+    {% for order in orders %}
+      <li class="order-item">
+        <div class="order-details">
+          <p><strong>Номер заказа:</strong> {{ order.id }}</p>
+          <p><strong>Заказ пользователя:</strong> {{ order.user.username }}</p>
+          <p><strong>Телефон:</strong> {{ order.phone }}</p>
+          <p><strong>Адрес:</strong> {{ order.address }}</p>
+          <p><strong>Комментарий:</strong> {{ order.comment }}</p>
+          <p><strong>Корзина:</strong> {{ order.all_name }}</p>
+          <p><strong>Статус:</strong> {{ order.status }}</p>
+          {% if order.delivery_status == 'pending' %}
+          <button class="filter-button" onclick="location.href='{% url 'accept_delivery' order.id %}'">Принять в доставку</button>
+          {% elif order.delivery_status == 'in_transit' %}
+          <button class="filter-button" onclick="location.href='{% url 'close_delivery' order.id %}'">Товар доставлен</button>
+          {% elif order.delivery_status == 'delivered' %}
+          Товар доставлен
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

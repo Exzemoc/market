@@ -4,27 +4,33 @@
 
 {% block content %}
   <h1>Страница персонала</h1>
-  <ul>
+  <div class="order-list">
     {% for order in orders %}
-      <li>
-        Заказ пользователя: {{ order.user.username }}<br>
-        Телефон: {{ order.phone }}<br>
-        Адрес: {{ order.address }}<br>
-        Комментарий: {{ order.comment }}<br>
-        Корзина: {{ order.all_name }}<br>
-        Подтверждение заказа:
-        {% if not order.is_confirmed %}
-          <a href="{% url 'confirm_order' order.id %}"><button class="filter-button">Подтвердить</button></a>
-        {% else %}
-          Подтверждено
-        {% endif %}<br>
-        Закрыть заказ:
-        {% if not order.is_closed %}
-          <a href="{% url 'close_order' order.id %}"><button class="filter-button">Закрыть</button></a>
-        {% else %}
-          Закрыто
-        {% endif %}
-      </li>
+      <div class="order-item">
+        <div class="order-details">
+          <p><strong>Номер заказа:</strong> {{ order.id }}</p>
+          <p><strong>Заказ пользователя:</strong> {{ order.user.username }}</p>
+          <p><strong>Телефон:</strong> {{ order.phone }}</p>
+          <p><strong>Адрес:</strong> {{ order.address }}</p>
+          <p><strong>Комментарий:</strong> {{ order.comment }}</p>
+          <p><strong>Корзина:</strong> {{ order.all_name }}</p>
+          <p><strong>Статус:</strong> {{ order.status }}</p>
+          <p><strong>Статус доставки:</strong> {{ order.delivery_status }}</p><br>
+        </div>
+        <div class="order-actions">
+          {% if not order.is_confirmed %}
+            <a href="{% url 'confirm_order' order.id %}"><button class="filter-button">Подтвердить</button></a>
+          {% else %}
+            <p class="status-confirmed">Подтверждено</p>
+          {% endif %}
+
+          {% if not order.is_closed %}
+            <a href="{% url 'close_order' order.id %}"><button class="filter-button">Закрыть</button></a>
+          {% else %}
+            <p class="status-closed">Закрыто</p>
+          {% endif %}
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}

@@ -1,9 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
 from .models import Wallet
 
 
@@ -32,12 +32,14 @@ def login_view(request):
     return render(request, 'users/login.html', {'form': form})
 
 
+@login_required(login_url='/users/login/')
 def logout_view(request):
     logout(request)
     return redirect('/')
 
 
 # Выводит бланс пользователя
+@login_required(login_url='/users/login/')
 def user_balance(request):
     user = request.user
 
@@ -52,3 +54,9 @@ def user_balance(request):
         'balance': balance
     }
     return render(request, 'users/balance.html', {'balance': balance})
+
+
+
+
+
+

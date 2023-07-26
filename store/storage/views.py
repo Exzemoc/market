@@ -1,13 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import DetailView
 from .models import Product, Rating
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.db.models import Avg
 from orders.models import Cart, ProductInCart
-from django.db.models import F
-from rest_framework import viewsets
-from .serializers import ProductSerializer
 
 
 def products_list(request):
@@ -23,7 +19,6 @@ def product_detail(request, pk):
     already_rated = Rating.objects.filter(product=product, user=request.user).exists()
     average_rating = Rating.objects.filter(product=product).aggregate(Avg('rating'))['rating__avg']
 
-
     context = {
         'product': product,
         'already_rated': already_rated,
@@ -33,6 +28,7 @@ def product_detail(request, pk):
 
 
 # Добавление рейтинга товара
+@login_required(login_url='/users/login/')
 def rate_product(request, pk):
     if request.method == 'POST':
         rating_value = int(request.POST['rating'])
@@ -44,6 +40,7 @@ def rate_product(request, pk):
 
 
 # Добавление нужного кол-во товара в корзину
+@login_required(login_url='/users/login/')
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     quantity = int(request.POST.get('quantity', 1))
@@ -67,6 +64,7 @@ def add_to_cart(request, pk):
     return redirect('product_room', pk=pk)
 
 
+@login_required(login_url='/users/login/')
 def home_product(request):
     title = 'Список товаров'
     latest_products = Product.objects.filter(is_active=True)
@@ -94,8 +92,3 @@ def home_product(request):
         'latest_products': latest_products,
     }
     return render(request, 'storage/products_list.html', context)
-
-
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer

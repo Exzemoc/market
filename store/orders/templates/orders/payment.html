@@ -5,16 +5,14 @@
 <h1>Оплата</h1>
     <form method="post" action="{% url 'payment' %}">
         {% csrf_token %}
-        <p>Сумма платежа: {{ cart.total_price }}</p>
-       <nav>
-            <ul>
-                <!-- ... остальные пункты меню -->
+        <h3>Сумма платежа: {{ cart.total_price }}<br>
+
                 {% if user.wallet.balance > cart.total_price %}
-                    <button type="submit" class="filter-button">Оплатить</button>
+                    <button class="filter-button">Оплатить</button>
                 {% else %}
-                    <li><a href="/users/balance/">Недостаточно средств</a></li>
+                    <a href="/users/balance/">Недостаточно средств</a>
                 {% endif %}
-            </ul>
-        </nav>
+
+        </h3>
     </form>
 {% endblock %}

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'orders',
     'staff_status',
     'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+

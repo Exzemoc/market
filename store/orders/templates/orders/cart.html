@@ -3,20 +3,24 @@
 
 {% block content %}
     <h1>Корзина</h1>
-    {% if cart %}
-        <ul>
-        {% for item in cart.productincart_set.all %}
-            <li>
-                {{ item.product.name }} - Количество: {{ item.quantity }} - Цена: {{ item.price }}
-                <a href="{% url 'remove_from_cart' item.id %}"><button class="filter-button">Удалить</button></a>
-            </li>
-        {% endfor %}
-        </ul>
-        <p>Общая стоимость: {{ cart.total_price }}</p>
-        <p>Общее количество товаров: {{ cart.total_items }}</p>
-        <a href="{% url 'clear_cart' %}"><button class="filter-button">Очистить корзину</button></a>
-        <a href="/cart/delivery_choice/"><button class="filter-button">Оплатить</button></a>
+    {% if cart.total_items is not 0 %}
+        {% if cart %}
+            <ul>
+            {% for item in cart.productincart_set.all %}
+                <li>
+                    {{ item.product.name }} - Количество: {{ item.quantity }} - Цена: {{ item.price }}
+                    <a href="{% url 'remove_from_cart' item.id %}"><button class="filter-button">Удалить</button></a>
+                </li>
+            {% endfor %}
+            </ul>
+            <p>Общая стоимость: {{ cart.total_price }}</p>
+            <p>Общее количество товаров: {{ cart.total_items }}</p>
+            <a href="{% url 'clear_cart' %}"><button class="filter-button">Очистить корзину</button></a>
+            <a href="/cart/delivery_choice/"><button class="filter-button">Оплатить</button></a>
+            {% else %}
+            <h4>Корзина пуста.</h4>
+            {% endif %}
     {% else %}
-        <p>Корзина пуста.</p>
+        <h4>Корзина пуста.</h4>
     {% endif %}
 {% endblock %}
